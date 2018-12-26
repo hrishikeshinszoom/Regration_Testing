@@ -23,14 +23,20 @@ public class AlertHelper {
 	public void dismissAlert() {
 		getAlert().dismiss();
 	}
-	
+
 	public String setAlertText() {
 		String text = getAlert().getText();
 		return text;
 	}
-	
-	public void isAlertPresent() {
-		
-	}
-}	
 
+	public boolean isAlertPresent() {
+
+		try {
+			getAlert();
+			return true;
+		} catch (Exception e) {
+			System.out.println("No alert present");
+		}
+			return false;
+	}
+}
