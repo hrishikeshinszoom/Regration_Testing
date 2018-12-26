@@ -37,6 +37,22 @@ public class AlertHelper {
 		} catch (Exception e) {
 			System.out.println("No alert present");
 		}
-			return false;
+		return false;
 	}
+
+	public void AcceptAlertIfPresent() {
+		if (!isAlertPresent())
+			return;
+		acceptAlert();
+
+	}
+
+	public void DismissAlertIfPresent() {
+
+		if (!isAlertPresent())
+			return;
+		dismissAlert();
+
+	}
+
 }
