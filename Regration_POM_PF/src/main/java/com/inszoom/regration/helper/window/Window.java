@@ -36,8 +36,23 @@ public class Window {
 		driver.switchTo().window(windowsID.get(index));
 	}
 
+	public void switchToParentWindow() {
+		LinkedList<String> windowsID = new LinkedList<String>(windowHandles());
+		driver.switchTo().window(windowsID.get(0));
+	}
+
 	public void switchToParentCloseChildWindow() {
-		
+		LinkedList<String> windowsID = new LinkedList<String>(windowHandles());
+
+		for (int i = 1; i <= windowsID.size(); i++) {
+			driver.switchTo().window(windowsID.get(i));
+			driver.close();
+		}
+		switchToParentWindow();
+	}
+
+	public void switchToFrame(String nameOrID) {
+		driver.switchTo().frame(nameOrID);
 	}
 
 }
