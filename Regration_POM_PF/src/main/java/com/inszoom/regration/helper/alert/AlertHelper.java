@@ -9,7 +9,6 @@ public class AlertHelper {
 
 	public AlertHelper(WebDriver driver) {
 		this.driver = driver;
-
 	}
 
 	public Alert getAlert() {
@@ -40,19 +39,16 @@ public class AlertHelper {
 		return false;
 	}
 
-	public void AcceptAlertIfPresent() {
+	public void acceptAlertIfPresent() {
 		if (!isAlertPresent())
 			return;
 		acceptAlert();
-
 	}
 
-	public void DismissAlertIfPresent() {
-
+	public void dismissAlertIfPresent() {
 		if (!isAlertPresent())
 			return;
 		dismissAlert();
-
 	}
 
 }
