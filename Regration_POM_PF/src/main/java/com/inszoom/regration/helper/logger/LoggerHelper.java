@@ -8,7 +8,7 @@ public class LoggerHelper {
 	private static boolean root = false;
 
 	public static Logger getLogger(Class cls) {
-		if (root = true) {
+		if (root) {
 			return Logger.getLogger(cls);
 		}
 
