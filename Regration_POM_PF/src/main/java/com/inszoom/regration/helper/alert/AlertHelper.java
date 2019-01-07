@@ -1,8 +1,11 @@
 package com.inszoom.regration.helper.alert;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
+
+import com.inszoom.regration.helper.logger.LoggerHelper;
 
 
 /**
@@ -11,42 +14,42 @@ import org.openqa.selenium.WebDriver;
 public class AlertHelper{
 	
 	private WebDriver driver;
-	//private Logger oLog = LoggerHelper.getLogger(AlertHelper.class);
+	private Logger oLog = LoggerHelper.getLogger(AlertHelper.class);
 	
 	public AlertHelper(WebDriver driver) {
 		this.driver = driver;
-		//oLog.debug("AlertHelper : " + this.driver.hashCode());
+		oLog.debug("AlertHelper : " + this.driver.hashCode());
 	}
 	
 	public Alert getAlert() {
-		//oLog.debug("");
+		oLog.debug("");
 		return driver.switchTo().alert();
 	}
 	
 	public void AcceptAlert() {
-		//oLog.info("");
+		oLog.info("");
 		getAlert().accept();
 	}
 	
 	public void DismissAlert() {
-		//oLog.info("");
+		oLog.info("");
 		getAlert().dismiss();
 	}
 
 	public String getAlertText() {
 		String text = getAlert().getText();
-		//oLog.info(text);
+		oLog.info(text);
 		return text;
 	}
 
 	public boolean isAlertPresent() {
 		try {
 			driver.switchTo().alert();
-			//oLog.info("true");
+			oLog.info("true");
 			return true;
 		} catch (NoAlertPresentException e) {
 			// Ignore
-			//oLog.info("false");
+			oLog.info("false");
 			return false;
 		}
 	}
