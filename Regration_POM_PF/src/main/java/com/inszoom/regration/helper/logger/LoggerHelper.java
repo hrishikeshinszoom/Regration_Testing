@@ -1,7 +1,7 @@
 package com.inszoom.regration.helper.logger;
 
 import org.apache.log4j.PropertyConfigurator;
-import org.testng.log4testng.Logger;
+import org.apache.log4j.Logger;
 
 import com.inszoom.regration.utils.ResourceHelper;
 
@@ -19,7 +19,8 @@ public class LoggerHelper {
 		}
 		// String log4jLOcation =
 		// System.getProperty("user.dir")+"/src/main/resources/log4j.properties";
-		PropertyConfigurator.configure(ResourceHelper.getResourcePath("\\src\\main\\resources\\configFile\\log4j.properties"));
+		PropertyConfigurator
+				.configure(ResourceHelper.getResourcePath("\\src\\main\\resources\\configFile\\log4j.properties"));
 		root = true;
 		return Logger.getLogger(clas);
 	}
