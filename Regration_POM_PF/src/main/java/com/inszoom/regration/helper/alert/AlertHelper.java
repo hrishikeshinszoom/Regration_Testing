@@ -58,7 +58,7 @@ public class AlertHelper{
 		if (!isAlertPresent())
 			return;
 		AcceptAlert();
-		//oLog.info("");
+		oLog.info("AcceptAlertIfPresent");
 	}
 
 	public void DismissAlertIfPresent() {
@@ -66,7 +66,7 @@ public class AlertHelper{
 		if (!isAlertPresent())
 			return;
 		DismissAlert();
-		//oLog.info("");
+		oLog.info("DismissAlertIfPresent");
 	}
 	
 	public void AcceptPrompt(String text) {
@@ -77,7 +77,7 @@ public class AlertHelper{
 		Alert alert = getAlert();
 		alert.sendKeys(text);
 		alert.accept();
-		//oLog.info(text);
+		oLog.info(text);
 	}
 }
 
