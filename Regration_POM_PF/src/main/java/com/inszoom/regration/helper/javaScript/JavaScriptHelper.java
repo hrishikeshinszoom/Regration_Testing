@@ -5,6 +5,11 @@ import org.openqa.selenium.WebDriver;
 
 import com.inszoom.regration.helper.logger.LoggerHelper;
 
+/**
+ * 
+ * @author insind5006
+ *
+ */
 public class JavaScriptHelper {
 	
 	private WebDriver driver;
@@ -14,4 +19,6 @@ public class JavaScriptHelper {
 		this.driver = driver;
 		oLog.debug("JavaScriptHelper : " + this.driver.hashCode());
 	}
+	
+	
 }
