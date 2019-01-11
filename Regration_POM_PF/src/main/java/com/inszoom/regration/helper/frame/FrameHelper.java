@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import com.inszoom.regration.helper.logger.LoggerHelper;
 
 /**
- * @author RISHIKESH
+ * @author HRISHIKESH
  *
  */
 public class FrameHelper {
