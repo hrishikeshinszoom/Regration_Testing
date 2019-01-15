@@ -26,5 +26,11 @@ public class DropDownHelper {
 		select.selectByVisibleText(visibleValue);
 		oLog.info("Locator : " + element + " Value : " + visibleValue);
 	}
-
+	
+//	public List<WebElement> getDropdownValues(String element){
+//		List<WebElement> list = driver.findElements(By.xpath(element));
+//		return list;
+//	}
+	
+	
 }
