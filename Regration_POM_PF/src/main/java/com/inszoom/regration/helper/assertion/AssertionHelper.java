@@ -16,7 +16,7 @@ public class AssertionHelper {
 		oLog.debug("AssertionHelper : " + this.driver.hashCode());
 	}
 
-	public synchronized boolean verifyElementIfPresent(WebElement element) {
+	public synchronized boolean verifyElementPresent(WebElement element) {
 		boolean isDisplayed = false;
 		try {
 
@@ -28,6 +28,38 @@ public class AssertionHelper {
 
 		return isDisplayed;
 	}
-	
-	
+
+	public synchronized boolean verifyElementNotPresent(WebElement element) {
+		boolean isDisplayed = false;
+		try {
+
+			element.isDisplayed();
+			oLog.info(element.getText() + "is displayed");
+
+		} catch (Exception e) {
+			oLog.error("element not found" + e);
+
+			isDisplayed = true;
+		}
+		return isDisplayed;
+	}
+
+	public synchronized boolean verifyTextEquals(WebElement element, String expectedText) {
+		boolean flag = false;
+		try {
+
+			String actualText = element.getText();
+			if (actualText.equals(expectedText)) {
+				oLog.info("actual text is: " + actualText + "expected text is :" + expectedText);
+				return flag = true;
+			} else {
+				
+			}
+
+		} catch (Exception e) {
+
+		}
+		return flag;
+
+	}
 }
