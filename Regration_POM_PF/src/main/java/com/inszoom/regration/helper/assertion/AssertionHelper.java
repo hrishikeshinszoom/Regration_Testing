@@ -53,13 +53,15 @@ public class AssertionHelper {
 				oLog.info("actual text is: " + actualText + "expected text is :" + expectedText);
 				return flag = true;
 			} else {
-				
+				oLog.error("actual text is: " + actualText + "expected text is: " + expectedText);
+				return flag;
 			}
 
 		} catch (Exception e) {
-
+			oLog.error("actual text is: " + element.getText() + "expected text is: " + expectedText);
+			oLog.info("text is not matching" + e);
+			return flag;
 		}
-		return flag;
 
 	}
 }
