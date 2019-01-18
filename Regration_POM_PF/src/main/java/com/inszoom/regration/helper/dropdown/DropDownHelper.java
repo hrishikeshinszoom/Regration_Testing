@@ -17,7 +17,7 @@ import com.inszoom.regration.helper.logger.LoggerHelper;
 public class DropDownHelper {
 
 	private WebDriver driver;
-	private Logger oLog = LoggerHelper.getLogger(DropDownHelper.class);
+	private static final Logger oLog = LoggerHelper.getLogger(DropDownHelper.class);
 
 	public DropDownHelper(WebDriver driver) {
 		this.driver = driver;
