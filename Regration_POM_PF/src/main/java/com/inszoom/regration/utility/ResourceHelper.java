@@ -1,4 +1,4 @@
-package com.inszoom.regration.utils;
+package com.inszoom.regration.utility;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
