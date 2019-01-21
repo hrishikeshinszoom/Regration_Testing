@@ -27,7 +27,7 @@ public class TeseBase {
 	}
 
 	@BeforeTest
-	// before test (load configuration file, launch browser,)
+	
 	public void BeforeTest_LaunchBrowser(String browser, String url) {
 		try {
 			loadPropertiesFile();
@@ -43,14 +43,14 @@ public class TeseBase {
 
 		if (System.getProperty("os.name").contains("Window")) {
 			if (browser.equalsIgnoreCase("firefox")) {
-				// https://github.com/mozilla/geckodriver/releases
+				
 				System.out.println(System.getProperty("user.dir"));
 				System.setProperty("webdriver.gecko.driver", ".//drivers/chromedriver.exe");
 
 				driver = new FirefoxDriver();
 
 			} else if (browser.equalsIgnoreCase("chrome")) {
-				// https://chromedriver.storage.googleapis.com/index.html
+				
 				System.setProperty("webdriver.chrome.driver", ".//drivers/chromedriver.exe");
 
 				driver = new ChromeDriver();

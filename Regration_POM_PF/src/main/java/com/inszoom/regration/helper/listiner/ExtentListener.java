@@ -20,11 +20,13 @@ public class ExtentListener implements ITestListener {
 	private Logger olog = LoggerHelper.getLogger(ExtentListener.class);
 
 	public void onTestStart(ITestResult result) {
-		
+		Reporter.log(result.getMethod().getMethodName() + "Test started...");
+		olog.info(result.getMethod().getMethodName() + "Test started...");
 	}
 
 	public void onTestSuccess(ITestResult result) {
-		
+		Reporter.log(result.getMethod().getMethodName() + "Test passed...");
+		olog.info(result.getMethod().getMethodName() + "Test passed...");
 	}
 
 	public void onTestFailure(ITestResult result) {
