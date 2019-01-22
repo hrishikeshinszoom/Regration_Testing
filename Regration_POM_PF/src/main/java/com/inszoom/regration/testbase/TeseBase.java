@@ -27,7 +27,6 @@ public class TeseBase {
 	}
 
 	@BeforeTest
-	
 	public void BeforeTest_LaunchBrowser(String browser, String url) {
 		try {
 			loadPropertiesFile();

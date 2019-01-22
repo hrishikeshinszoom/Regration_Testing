@@ -3,6 +3,7 @@ package com.inszoom.regration.helper.listiner;
 import org.apache.log4j.Logger;
 import org.testng.IRetryAnalyzer;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 
 import com.inszoom.regration.helper.logger.LoggerHelper;
 
@@ -37,5 +38,10 @@ public class Retry implements IRetryAnalyzer {
 		}
 
 		return resultName;
+	}
+
+	public void log(String data) {
+		olog.info(data);
+		Reporter.log(data);
 	}
 }

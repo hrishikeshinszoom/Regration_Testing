@@ -1,9 +1,10 @@
 package com.inszoom.regration.helper.logger;
 
 import org.apache.log4j.PropertyConfigurator;
-import org.apache.log4j.Logger;
 
-import com.inszoom.regration.utils.ResourceHelper;
+import com.inszoom.regration.utility.ResourceHelper;
+
+import org.apache.log4j.Logger;
 
 /**
  * @author hrishikesh basak
