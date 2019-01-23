@@ -8,9 +8,6 @@ import org.openqa.selenium.WebDriver;
 import com.inszoom.regration.helper.logger.LoggerHelper;
 
 
-/**
- * @author hrishikesh basak
- */
 public class AlertHelper{
 	
 	private WebDriver driver;

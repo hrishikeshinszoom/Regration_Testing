@@ -1,30 +1,18 @@
-/**
- * 
- */
 package com.inszoom.regration.helper.listiner;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 
 import com.inszoom.regration.helper.logger.LoggerHelper;
-import com.inszoom.regration.testbase.TeseBase;
 
-/**
- * @author insind5006
- *
- */
-public class Listener extends TeseBase implements ITestListener {
+public class Listener implements ITestListener {
 
 	private Logger olog = LoggerHelper.getLogger(Listener.class);
 
@@ -34,10 +22,12 @@ public class Listener extends TeseBase implements ITestListener {
 	}
 
 	public void onTestSuccess(ITestResult result) {
-		Reporter.log(result.getMethod().getMethodName() + "Test passed...");
-		olog.info(result.getMethod().getMethodName() + "Test passed...");
+
+		Reporter.log(result.getMethod().getMethodName() + "Test Successed...");
+		olog.info(result.getMethod().getMethodName() + "Test Successed...");
 	}
 
+	@SuppressWarnings("unused")
 	public void onTestFailure(ITestResult result) {
 
 		if (!result.isSuccess()) {
@@ -46,20 +36,24 @@ public class Listener extends TeseBase implements ITestListener {
 
 			String methodName = result.getName();
 
-			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			// File scrFile = ((TakesScreenshot)
+			// driver).getScreenshotAs(OutputType.FILE);
 			File destFile;
-			try {
-				String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "";
-				destFile = new File((String) reportDirectory + "/failure_screenshots/" + methodName + "_"
-						+ formater.format(calendar.getTime()) + ".png");
+			// try {
+			String reportDirectory = new File(System.getProperty("user.dir")).getAbsolutePath() + "/test_reports/";
+			destFile = new File((String) reportDirectory + "/failure_screenshots/" + methodName + "_"
+					+ formater.format(calendar.getTime()) + ".png");
 
-				FileUtils.copyFile(scrFile, destFile);
-			} catch (IOException e) {
+			// FileUtils.copyFile(scrFile, destFile);
+			// } catch (IOException e) {
 
-				e.printStackTrace();
-			}
-
+			// e.printStackTrace();
+			// }
 		}
+
+		Reporter.log(result.getMethod().getMethodName() + "Test Failed...");
+		olog.info(result.getMethod().getMethodName() + "Test Failed...");
+
 	}
 
 	public void onTestSkipped(ITestResult result) {

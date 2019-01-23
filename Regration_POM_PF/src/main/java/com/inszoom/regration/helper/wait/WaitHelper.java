@@ -1,5 +1,6 @@
 package com.inszoom.regration.helper.wait;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
@@ -35,9 +36,8 @@ public class WaitHelper {
 	}
 
 	private WebDriverWait getWait(int timeOutInSeconds, int pollingEveryInMiliSec) {
-		oLog.debug("WebDriverWait");
 		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
-		wait.pollingEvery(pollingEveryInMiliSec, TimeUnit.MILLISECONDS);
+		wait.pollingEvery(Duration.ofMillis(pollingEveryInMiliSec));
 		wait.ignoring(NoSuchElementException.class);
 		wait.ignoring(ElementNotVisibleException.class);
 		wait.ignoring(StaleElementReferenceException.class);
