@@ -1,20 +1,14 @@
 package com.inszoom.regration.helper.assertion;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import com.inszoom.regration.helper.logger.LoggerHelper;
 
 public class AssertionHelper {
 
-	private WebDriver driver;
 	private static final Logger oLog = LoggerHelper.getLogger(AssertionHelper.class);
-
-	public AssertionHelper(WebDriver driver) {
-		this.driver = driver;
-		oLog.debug("AssertionHelper : " + this.driver.hashCode());
-	}
 
 	public synchronized boolean verifyElementPresent(WebElement element) {
 		boolean isDisplayed = false;
@@ -63,5 +57,25 @@ public class AssertionHelper {
 			return flag;
 		}
 
+	}
+
+	public static void verifyText(String A1, String A2) {
+		Assert.assertEquals(A1, A2);
+	}
+
+	public static void makeTrue(String message) {
+		Assert.assertTrue(true, message);
+	}
+
+	public static void makeTrue() {
+		Assert.assertTrue(true);
+	}
+
+	public static void makeFalse(String message) {
+		Assert.assertTrue(false, message);
+	}
+
+	public static void makeFalse() {
+		Assert.assertTrue(false);
 	}
 }
