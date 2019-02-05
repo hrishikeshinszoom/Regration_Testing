@@ -1,126 +1,84 @@
 package com.inszoom.regration.testbase;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
+import com.inszoom.regration.helper.browserConfiguration.BrowserType;
+import com.inszoom.regration.helper.browserConfiguration.ChromeBrowser;
+import com.inszoom.regration.helper.browserConfiguration.config.ObjectReader;
+import com.inszoom.regration.helper.browserConfiguration.config.PropertyReader;
+import com.inszoom.regration.helper.logger.LoggerHelper;
+import com.inszoom.regration.helper.wait.WaitHelper;
 import com.inszoom.regration.utility.ExtentManager;
-
-import net.bytebuddy.jar.asm.commons.Method;
 
 public class TeseBase {
 
 	public static ExtentReports extent;
 	public static ExtentTest test;
 	public WebDriver driver;
-	public static Properties OR;
-	public File f1;
-	public FileInputStream file;
+	private Logger oLog = LoggerHelper.getLogger(TeseBase.class);
 
 	@BeforeSuite
 	public void beforeSuite() {
 		extent = ExtentManager.getInstance();
 	}
 
-	@AfterSuite
-	public void afterClass() {
-		test = extent.createTest(getClass().getName());
-	}
-
-	@BeforeMethod
-	public void afterMethod(Method method) {
-		test.log(Status.INFO, method.getName() + " test started");
-	}
-
-	@AfterMethod
-	public void beforeMethod(ITestResult result) {
-		if (result.getStatus() == ITestResult.FAILURE) {
-			test.log(Status.FAIL, result.getThrowable());
-		} else if (result.getStatus() == ITestResult.SUCCESS) {
-			test.log(Status.PASS, result.getTestName() + "test passed");
-		} else if (result.getStatus() == ITestResult.SKIP) {
-			test.log(Status.SKIP, result.getThrowable() + "test skipped");
-		}
-
-	}
-
-	public void loadPropertiesFile() throws IOException {
-
-		OR = new Properties();
-		f1 = new File(".//src//main//java//com//inszoom//regration//config//config.properties");
-		file = new FileInputStream(f1);
-		OR.load(file);
-
-	}
-
 	@BeforeTest
-	public void BeforeTest_LaunchBrowser(String browser, String url) {
+	public void beforeTest() {
+		ObjectReader.reader = new PropertyReader();
+		
+	}
+	
+	
+	/*
+	 * @BeforeMethod public void beforeMethod(Method method) {
+	 * test.log(Status.INFO, method.getName() + " test started");
+	 * oLog.info("**************"+method.getName()+"Started***************"); }
+	 */
+
+	/*
+	 * @AfterMethod public void afterMethod(ITestResult result) { if
+	 * (result.getStatus() == ITestResult.FAILURE) { test.log(Status.FAIL,
+	 * result.getThrowable()); } else if (result.getStatus() ==
+	 * ITestResult.SUCCESS) { test.log(Status.PASS, result.getName() +
+	 * "test passed"); } else if (result.getStatus() == ITestResult.SKIP) {
+	 * test.log(Status.SKIP, result.getThrowable() + "test skipped"); }
+	 * oLog.info("**************"+result.getName()+"Finished***************");
+	 * extent.flush(); }
+	 */
+
+	public WebDriver getBrowserObject(BrowserType btype) throws Exception {
+
 		try {
-			loadPropertiesFile();
+			switch (btype) {
+			case Chrome:
+				ChromeBrowser chrome = ChromeBrowser.class.newInstance();
+				ChromeOptions option = chrome.getChromeOptions();
+				return chrome.getChromeDriver(option);
+
+			default:
+				throw new Exception("Driver not found: " + btype.name());
+			}
 		} catch (Exception e) {
-			System.out.println(e);
-		}
-		openBrowser(browser);
-		getUrl(url);
-
-	}
-
-	public void openBrowser(String browser) {
-
-		if (System.getProperty("os.name").contains("Window")) {
-			if (browser.equalsIgnoreCase("firefox")) {
-
-				System.out.println(System.getProperty("user.dir"));
-				System.setProperty("webdriver.gecko.driver", ".//drivers/chromedriver.exe");
-
-				driver = new FirefoxDriver();
-
-			} else if (browser.equalsIgnoreCase("chrome")) {
-
-				System.setProperty("webdriver.chrome.driver", ".//drivers/chromedriver.exe");
-
-				driver = new ChromeDriver();
-			}
-		} else if (System.getProperty("os.name").contains("Mac")) {
-			System.out.println(System.getProperty("os.name"));
-			if (browser.equalsIgnoreCase("firefox")) {
-				System.out.println(System.getProperty("user.dir"));
-				System.setProperty("webdriver.gecko.driver", ".//drivers/chromedriver.exe");
-
-				driver = new FirefoxDriver();
-
-			} else if (browser.equalsIgnoreCase("chrome")) {
-				System.setProperty("webdriver.chrome.driver", ".//drivers/chromedriver.exe");
-
-				driver = new ChromeDriver();
-			}
-
+			oLog.info(e.getMessage());
+			throw e;
 		}
 	}
 
-	public void getUrl(String url) {
-		driver.get(url);
+	public void setUpDriver(BrowserType btype) throws Exception {
+		driver = getBrowserObject(btype);
+		oLog.info("initialize wedriver:" + driver.hashCode());
+		WaitHelper wait = new WaitHelper(driver);
+		wait.setImplicitWait(ObjectReader.reader.implicitwait(), TimeUnit.SECONDS);
+		wait.setPageLoadTimeout(ObjectReader.reader.pageLoagTime(), TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-
 	}
 
-	public static void main(String[] args) throws Exception {
-		TeseBase test = new TeseBase();
-		test.loadPropertiesFile();
-
-	}
 }

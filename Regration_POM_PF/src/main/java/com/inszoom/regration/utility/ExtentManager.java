@@ -11,7 +11,7 @@ public class ExtentManager {
 
 	public static ExtentReports getInstance() {
 		if (extent == null) {
-			return createInstance("test-output/extent.html");
+			return createInstance("test-output\\extent.html");
 		} else {
 			return extent;
 		}

@@ -19,11 +19,11 @@ public class TC_001 extends TeseBase {
 
 	@Test
 	public void testLogin02() {
-		AssertionHelper.makeFalse();
+		AssertionHelper.makeTrue();
 	}
 
 	@Test
 	public void testLogin03() {
-		AssertionHelper.makeFalse();
+		AssertionHelper.makeTrue();
 	}
 }
